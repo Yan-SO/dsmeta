@@ -1,6 +1,6 @@
 
-import SelesCard from "./components/SalesCard"
-import Header from "./components/Header"
+import SelesCard from "./components/SalesCard";
+import Header from "./components/Header";
 
 function App() {
   return (
@@ -11,7 +11,6 @@ function App() {
           <div className="dsmeta-container">
             <div className="dsmeta-Card">
               <SelesCard/>
-              <h1>ola mundo</h1>
             </div>
           </div>
         </section>
@@ -20,4 +19,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

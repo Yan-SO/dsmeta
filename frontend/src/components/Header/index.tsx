@@ -1,6 +1,6 @@
 import logo from '../../assets/img/Logo.svg';
 
-import './styles.css'
+import './styles.css';
 
 function Header() {
     return(
