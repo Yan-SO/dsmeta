@@ -2,23 +2,28 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Sale } from "../../models/sale";
+import { BASE_URL } from "../../utils/request";
 import NotificationButton from '../NotificationButton';
 import './styles.css';
 
 function SelesCard() {
 
     const min = new Date(new Date().setDate(new Date().getDate() - 365));
-    const max =new Date();
+    const max = new Date();
 
-    const [minDate, setMinDate]= useState(min);
-    const [maxDate, setMaxDate]= useState(max);
+    const [minDate, setMinDate] = useState(min);
+    const [maxDate, setMaxDate] = useState(max);
 
-    useEffect(() =>{
-        axios.get('http://localhost:8080/seles')
-            .then(resposta =>{
-                console.log(resposta.data)
+    const [sales, setSales] = useState<Sale[]>([]);
+
+    useEffect(() => {
+        axios.get(`${BASE_URL}/seles`)
+            .then(resposta => {
+                console.log(resposta.data.content)
+                setSales(resposta.data.content)
             })
-    },[]);
+    }, []);
 
     return (
         <div className="dsmeta-Card">
@@ -53,72 +58,24 @@ function SelesCard() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td className="show992">#456</td>
-                            <td className="show576">08/07/2022</td>
-                            <td>Anakin</td>
-                            <td className="show992">15</td>
-                            <td className="show992">11</td>
-                            <td>R$ 55300.00</td>
-                            <td>
-                                <div className="dsmeta-red-btm-conteiner">
-                                    <NotificationButton />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className="show992">#456</td>
-                            <td className="show576">08/07/2022</td>
-                            <td>Anakin</td>
-                            <td className="show992">15</td>
-                            <td className="show992">11</td>
-                            <td>R$ 55300.00</td>
-                            <td>
-                                <div className="dsmeta-red-btm-conteiner">
-                                    <NotificationButton />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className="show992">#456</td>
-                            <td className="show576">08/07/2022</td>
-                            <td>Anakin</td>
-                            <td className="show992">15</td>
-                            <td className="show992">11</td>
-                            <td>R$ 55300.00</td>
-                            <td>
-                                <div className="dsmeta-red-btm-conteiner">
-                                    <NotificationButton />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className="show992">#456</td>
-                            <td className="show576">08/07/2022</td>
-                            <td>Anakin</td>
-                            <td className="show992">15</td>
-                            <td className="show992">11</td>
-                            <td>R$ 55300.00</td>
-                            <td>
-                                <div className="dsmeta-red-btm-conteiner">
-                                    <NotificationButton />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className="show992">#456</td>
-                            <td className="show576">08/07/2022</td>
-                            <td>Anakin</td>
-                            <td className="show992">15</td>
-                            <td className="show992">11</td>
-                            <td>R$ 55300.00</td>
-                            <td>
-                                <div className="dsmeta-red-btm-conteiner">
-                                    <NotificationButton />
-                                </div>
-                            </td>
-                        </tr>
-
+                        {sales.map(sele => {
+                            return (
+                                <tr key={sele.id}>
+                                    <td className="show992">{sele.id}</td>
+                                    <td className="show576">{new Date(sele.date).toLocaleDateString()}</td>
+                                    <td>{sele.sellerName}</td>
+                                    <td className="show992">{sele.visited}</td>
+                                    <td className="show992">{sele.deals}</td>
+                                    <td>R$ {sele.amount.toFixed(2)}</td>
+                                    <td>
+                                        <div className="dsmeta-red-btm-conteiner">
+                                            <NotificationButton />
+                                        </div>
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                        
                     </tbody>
                 </table>
             </div>
