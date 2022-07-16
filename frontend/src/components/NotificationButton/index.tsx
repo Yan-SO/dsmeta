@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import icon from '../../assets/img/Notificaçao.svg';
 import { BASE_URL } from '../../utils/request';
 
@@ -11,7 +12,7 @@ type Props={
 function handClick(id : number){
     axios(`${BASE_URL}/seles/${id}/notification`)
         .then(resposta =>{
-            console.log('SUSSESSEOSOSOO')
+            toast.info("SMS enviado")
         })
     
 }

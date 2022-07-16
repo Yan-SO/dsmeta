@@ -24,7 +24,6 @@ function SelesCard() {
 
         axios.get(`${BASE_URL}/seles?minDate=${dmin}&maxDate=${dmax}`)
             .then(resposta => {
-                console.log(resposta.data.content)
                 setSales(resposta.data.content)
             })
     }, [minDate, maxDate]);
