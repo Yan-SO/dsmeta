@@ -73,7 +73,7 @@ function SelesCard() {
                                     <td>R$ {sele.amount.toFixed(2)}</td>
                                     <td>
                                         <div className="dsmeta-red-btm-conteiner">
-                                            <NotificationButton />
+                                            <NotificationButton seleId={sele.id} />
                                         </div>
                                     </td>
                                 </tr>
